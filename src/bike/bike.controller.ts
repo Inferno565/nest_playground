@@ -8,6 +8,7 @@ import {
   Query,
   Body,
   Patch,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CreateBikeDto } from './dto/create-bike.dto';
 import { BikeService } from './bike.service';
@@ -36,12 +37,15 @@ export class BikeController {
   }
 
   @Delete(':id')
-  deleteBike(@Param('id') id: string) {
-    return this.bikeService.deleteBike(+id);
+  deleteBike(@Param('id',ParseIntPipe) id: number) {
+    return this.bikeService.deleteBike(id);
   }
 
   @Patch(':id')
   updateBike(@Param('id') id: string, @Body() updateBikeDto: UpdateBikeDto) {
     return this.bikeService.updateBike(+id, updateBikeDto);
-  }
+  } 
 }
+
+
+// this is a test to check contributor clash
